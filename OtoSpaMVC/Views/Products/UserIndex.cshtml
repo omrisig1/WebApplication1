@@ -1,0 +1,115 @@
+﻿@model PaginatedList<OtoSpaMVC.Models.Product>
+@{
+    ViewData["Title"] = "Products";
+    ViewBag.herf2 = ViewBag.herf2 ?? "name";
+}
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="~/js/AddButtons.js"></script>
+<script src="~/js/SortAjax.js"></script>
+<script>
+    $(document).ready(function () {
+        var cf = "".concat("@ViewBag.CurrentFilter");
+        var cc = "".concat("@ViewBag.searchCategory");
+        var so = "".concat("@ViewBag.SortOrder");
+        var tso = "".concat("@ViewBag.TextSortOrder");
+        document.onload = showAllCategories(cf, cc, so);
+        document.onload = startsortorder(cf, cc, so, tso);
+    });
+</script>
+<h2>Products</h2>
+@*<p>
+    <a asp-action="Create" class="btn btn-success"> <span class="fa fa-plus-square" aria-hidden="true"></span> Create New</a>
+</p>*@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="row">
+        <div class="col-3">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @{ var showtext = "";
+                        if (String.IsNullOrEmpty(ViewData["searchCategory"] + ""))
+                        {
+                            showtext = "Filter by Category";
+                        }
+                        else
+                        {
+                            showtext = ViewData["searchCategory"].ToString();
+                        }
+                    }
+                    @showtext
+                    <span class="caret"></span>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="txtHint">
+                    @{ var disabled = String.IsNullOrEmpty(ViewData["searchCategory"] + "") ? "disabled" : ""; }
+                    <a asp-action="Index" asp-route-searchCategory=""
+                       asp-route-currentFilter="" class="dropdown-item @disabled">All categories</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Split button -->
+        <div class="col-3">
+            <div class="btn-group" role="group">
+                <div class="btn-group" role="group">
+                    <button id="sortorder" type="button" class="btn btn-info" data-toggle="dropdown">
+                        @ViewData["TextSortOrder"]
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" onclick="javascript:clicksortbutton('name')">Name</a>
+                        <a class="dropdown-item" onclick="javascript:clicksortbutton('price')">Price</a>
+                    </div>
+                </div>
+                <button type="button" id="btn_sort_up" class="btn btn-info">
+                    <span class="fa fa-sort-amount-asc"></span>
+                </button>
+                <button type="button" id="btn_sort_down" class="btn btn-info">
+                    <span class="fa fa-sort-amount-desc"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <form asp-area="" asp-controller="Products" asp-action="Index" asp-route-searchCategory="@ViewData["searchCategory"]"
+                  asp-route-sortOrder="@ViewData["sortOrder"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                <div class="row">
+                    @*Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)*@
+                    <div class="col-8">
+                        <input type="text" class="form-control" name="SearchString"
+                               value="@ViewData["CurrentFilter"]" placeholder="Search by name" aria-label="Search" />
+                    </div>
+                    <div class="col-3"> <button type="submit" role="button" class="btn btn-outline-success col">Search</button> </div>
+                    <div class="col-"><a asp-action="Index" class="btn btn-outline-info col">Clear</a></div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</nav>
+
+</p>
+
+<div id="idMultiProductTable">
+    <partial name="_MultiProductTable" model="@Model" />
+</div>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<a asp-action="Index"
+   asp-route-searchCategory="@ViewData["searchCategory"]"
+   asp-route-page="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-sortOrder="@ViewData["SortOrder"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-searchCategory="@ViewData["searchCategory"]"
+   asp-route-page="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-sortOrder="@ViewData["SortOrder"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

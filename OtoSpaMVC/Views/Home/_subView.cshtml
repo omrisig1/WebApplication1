@@ -1,0 +1,17 @@
+﻿@model PaginatedList<OtoSpaMVC.Models.Product>
+
+
+
+<div class="container">
+    <div class="row">
+
+        @{
+        foreach (var item in Model)
+        {
+            
+            <partial name="_SingleProduct" model="@item" />
+    }
+
+        }
+    </div>
+</div>

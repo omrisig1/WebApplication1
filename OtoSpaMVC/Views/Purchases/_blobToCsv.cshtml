@@ -1,0 +1,25 @@
+﻿@model IEnumerable<OtoSpaMVC.Models.bPurchasedProducts>
+@{
+    string csvText = "";
+    var blobs = Model ;
+    if (blobs != null)
+    {
+        foreach (var b in blobs)
+        {
+            var line = b.category.Name + '-' + b.product.ProductName + ',';
+            if (b.totalAmount == 0)
+            {
+                line = "NotPurchased-" + line + "1";
+            }
+            else
+            {
+                line = "Purchased-" + line + b.totalAmount;
+            }
+            csvText += line + '\n';
+        }
+    }
+}
+@Html.Raw(csvText)
+<script>
+    defaultLogger.log('@Html.Raw(csvText)','Purchases\_blobToCsv');
+</script>

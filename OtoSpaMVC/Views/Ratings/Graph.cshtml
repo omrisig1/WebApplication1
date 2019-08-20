@@ -1,0 +1,47 @@
+﻿@model IEnumerable<OtoSpaMVC.Models.Rating>
+@{
+    ViewData["Title"] = "Summery of all Product-Ratings";
+}
+
+<!--
+ # [disclaimer]:  // refers to relevant html+css+js files
+ The following amalgemation of code is part of our collage .Net-MVC5 project demand,
+ displaying a D3.js graph with some data for the admin web-interface.
+ This code was borrowed and changed from the following lovely person at:
+   - https://bl.ocks.org/kerryrodden/766f8f6d31f645c39f488a0befa1e3c8
+   - https://bl.ocks.org/kerryrodden/477c1bfb081b783f80ad
+ All rights and restrictions of respective open-source licesnces apply as mentioned in the original works.
+ We kindly thank kerryrodden for making these projects open-source and available !~
+-->
+
+<link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,600">
+<link rel="stylesheet" type="text/css" href="~/css/graph.css" />
+<script src="//d3js.org/d3.v3.min.js"></script>
+
+<link rel="stylesheet" href="~/css/TestBody.css" />
+<div class="newBody">
+    <div id="body">
+        <h2>@ViewData["Title"]</h2>
+        <div id="main">
+            <nav id="sequence" class="navbar" role="navigation">
+                <button type="button" name="ToRoot" id="ToRoot" class="btn btn-dark navbar-right"
+                        onclick="javascript:ExitToRoot();" disabled>
+                    ExitToRoot
+                </button>
+                <button type="button" name="load" id="load" class="btn btn-primary navbar-right"
+                        onclick="javascript: loadNow('/Ratings/Graphload',this.id);">
+                    Load Data
+                </button>
+            </nav>
+            <div id="chart">
+                <div id="explanation" style="visibility: hidden;">
+                    <span id="percentage"></span><br />
+                    of <span id="pr_group"></span>
+                </div>
+            </div>
+        </div>
+        <script src="~/js/zoomSunburst.js"></script>
+        <script src="~/js/loadButton.js" lang="text/javascript"></script>
+    </div>
+</div>

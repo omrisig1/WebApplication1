@@ -1,0 +1,55 @@
+﻿@model IEnumerable<OtoSpaMVC.Models.Purchase>
+
+@{
+    ViewData["Title"] = "Purchases";
+}
+
+<h2>Purchases</h2>
+<link rel="stylesheet" href="~/css/TestBody.css" />
+<div class="newBody">
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PurchaseDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Total)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PurchaseDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Total) ₪
+                    </td>
+                    <td>
+                        <partial name="_listButtons"
+                                 view-data='new ViewDataDictionary(this.ViewData){{ "targetId", item.ID }}' />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,57 @@
+﻿@model OtoSpaMVC.Models.Purchase
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+</script>
+
+
+
+
+<link rel="stylesheet" href="~/css/TestBody.css" />
+<h2>Details</h2>
+<div class="newBody">
+    <div>
+        <h4>Purchase</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.PurchaseDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PurchaseDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.User.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Total)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Total) ₪
+            </dd>
+            <dt>
+            </dt>
+            <dd>
+                @{
+                    var st = "";
+                    foreach (var i in Model.Items)
+                    {
+                        st += "Product Name: " + i.Product.ProductName + "\n"
+                            + ",Amount: " + i.Amount + "\n";
+                    }
+                }
+
+                <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" data-content="@st"> Items Bought </button>
+            </dd>
+        </dl>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+﻿
+@model OtoSpaMVC.Models.Rating
+
+@{
+    ViewData["Title"] = "TopRating";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Rating</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dd>
+            @Html.DisplayFor(model => model.Product.ProductPrice)
+        </dd>
+    </dl>
+</div>
+

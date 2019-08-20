@@ -1,0 +1,95 @@
+﻿@model OtoSpaMVC.Models.Cart
+
+@{
+    ViewData["Title"] = "MyCartDetails";
+}
+<link rel="stylesheet" href="~/css/TestBody.css" />
+<div class="header">
+    <h1>My Cart</h1>
+</div>
+
+<div class="newBody">
+    @*<div class="Goodie1">
+            <h4>Cart</h4>
+        </div>
+        <hr />*@
+
+    @if (Model.Items.ToArray().Length == 0)
+    {
+        <div class="Goodie1">
+            <dt> Seem like the Cart is empty. Go add some product and come back :) </dt>
+        </div>
+    }
+    @if (Model.Items.ToArray().Length != 0)
+    {
+        <form asp-route-cartid="@Model.ID">
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.User)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.User.UserName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Items)
+                </dt>
+
+                <dd class="col-sm-10">
+                    @{
+                        double totalo = 0;
+                        foreach (var item in Model.Items)
+                        {
+                            <dl>
+                                <dt class="col-sm-2"></dt>
+                                <dd class="col-sm-10"></dd>
+                                <dt class="col-sm-2">
+                                    @Html.DisplayFor(model => item.Product.ProductName)
+                                    @Html.DisplayFor(model => item.Amount)
+                                    @{
+                                        double price = item.Product.ProductPrice;
+                                        int amount = item.Amount;
+                                        double total = price * amount;
+                                        totalo += total;
+                                        @Html.DisplayFor(model => total)@:
+                                        <i class="fa fa-ils"></i>
+                                    }
+                                    <button type="submit" asp-action="AddProductToCart" asp-route-cartid="@Model.ID" asp-route-productid="@item.Product.ID" asp-route-amount="1"
+                                            class="btn btn-xs btn-success">
+                                        <span class="fa fa-plus-square" aria-hidden="true" />
+                                    </button>
+                                    <button type="submit" asp-action="AddProductToCart" asp-route-cartid="@Model.ID" asp-route-productid="@item.Product.ID" asp-route-amount="-1"
+                                            class="btn btn-xs btn-danger">
+                                        <span class="fa fa-minus-square" aria-hidden="true" />
+                                    </button>
+                                </dt>
+                            </dl>
+                        }
+                    }
+                    </dd>
+                    <dt></dt>
+                    <dt></dt>
+                    <dd class="col-sm-10">
+                        @if (Model.Items.ToArray().Length != 0 && totalo > 0)
+                        {
+                            <button asp-action="MakePurchase" asp-route-cartid="@Model.ID" class="btn btn-sm btn-default">
+                                <span class="fa fa-cart-arrow-down" aria-hidden="true"></span>
+                            </button>
+                            @totalo <span class="fa fa-ils" alt="₪"></span>
+                        }
+                    </dd>
+                </dl>
+                @if (!(Model.Items.ToArray().Length != 0 && totalo > 0))
+                {
+                    <a asp-controller="Products" asp-action="Index">Add Products</a>
+                }
+                else
+                {
+                    <div class="hoverT">
+                        <div class="Goodie1">
+                            <a asp-controller="Products" asp-action="Index">Add Products</a>
+                        </div>
+                    </div>
+                }
+        </form>
+        }
+    </div>

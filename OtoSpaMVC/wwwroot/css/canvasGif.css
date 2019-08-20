@@ -1,0 +1,13 @@
+
+#defaultCanvas0, #bgImage {
+    width: 900px;
+    height: 270px;
+    position: relative;
+    display: block;
+    justify-content: center;
+}
+
+#defaultCanvas0 {
+    margin-top: -270px;
+    margin-left: -25px;
+}

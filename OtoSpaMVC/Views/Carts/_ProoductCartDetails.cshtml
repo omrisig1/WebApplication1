@@ -1,0 +1,34 @@
+﻿@model OtoSpaMVC.Models.Cart
+
+@foreach (var item in Model.Items)
+{
+
+<dl>
+    
+
+        <dd></dd>
+       <dt>     
+                @Html.DisplayNameFor(model => item.Product.ProductName):
+                @Html.DisplayFor(model => item.Product.ProductName)
+                |
+                @Html.DisplayNameFor(model => item.Amount):
+                @Html.DisplayFor(model => item.Amount)|
+            
+    @{
+        double price = item.Product.ProductPrice;
+        int amount = item.Amount;
+        double total = price * amount;
+        @Html.DisplayFor(model => total)@:₪
+    }
+    <button type="submit" asp-action="AddProductToCart" asp-route-cartid="@Model.ID" asp-route-productid="@item.Product.ID" asp-route-amount="1"
+            class="btn btn-xs btn-success">
+        <span class="fa fa-plus-square" aria-hidden="true" />
+    </button>
+    <button type="submit" asp-action="AddProductToCart" asp-route-cartid="@Model.ID" asp-route-productid="@item.Product.ID" asp-route-amount="-1"
+            class="btn btn-xs btn-danger">
+        <span class="fa fa-minus-square" aria-hidden="true" />
+    </button>
+    </dt>
+</dl>
+
+}

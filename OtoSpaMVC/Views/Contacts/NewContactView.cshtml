@@ -1,0 +1,69 @@
+﻿@model OtoSpaMVC.Models.ContactUs
+
+@{
+    ViewData["Title"] = "NewContactView";
+}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Stylish Contact Form Flat Responsive Widget Template | Home :: w3layouts</title>
+    <link href="/clientcontact/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Stylish Contact Form Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <!--web-fonts-->
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+</head>
+<link href='//fonts.googleapis.com/css?family=Candal' rel='stylesheet' type='text/css'>
+<!--web-fonts-->
+<body>
+    <!---header--->
+    <div class="header">
+        <h1>OtoSpa Here For you</h1>
+    </div>
+    <!---header--->
+    <!---main--->
+    <div class="main-content">
+        <div class="contact-w3">
+            <form action="#" method="post">
+                @using (Html.BeginForm("NewContactView", "Contacts", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <label>Name</label>
+                    @Html.TextBoxFor(m => m.ContactName, new { @placeholder = "Full Name" })
+                    @Html.ValidationMessageFor(m => m.ContactName)
+                    <div class="row">
+                        <div class="contact-left-w3">
+                            <label>Email</label>
+                            @Html.TextBoxFor(m => m.Email, new { @placeholder = "Email" })
+                            @Html.ValidationMessageFor(m => m.Email)
+                        </div>
+                        <div class="contact-right-w3l">
+                            <label>Phone</label>
+                            @Html.TextBoxFor(m => m.Phone, new { @placeholder = "Phone Number" })
+                            @Html.ValidationMessageFor(m => m.Phone)
+                        </div>
+                    </div>
+                    <label>Subject</label>
+                    @Html.TextBoxFor(m => m.ContactHeader, new { @placeholder = "Subject" })
+                    @Html.ValidationMessageFor(m => m.ContactHeader)
+                    <div class="row1">
+                        <label>Message</label>
+                        @Html.TextBoxFor(m => m.Content, new { @placeholder = "Message" })
+                        @Html.ValidationMessageFor(m => m.Content)
+                    </div>
+                    <input type="submit" value="Submit" class="btn btn-default" />
+                }
+             </form>
+
+</div>
+    </div>
+    @*<div class="footer-w3-agile">
+        <p>&copy 2016 Stylish Contact Form . All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+    </div>*@
+
+    <!---main--->
+</body>
+</html>

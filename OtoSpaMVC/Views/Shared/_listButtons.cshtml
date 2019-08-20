@@ -1,0 +1,12 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var ID = @ViewData["targetId"];
+}
+
+<div class="row pull-left">
+    <a asp-action="Details" asp-route-id="@ID" class="btn btn-success"><span class="fa fa-info-circle" aria-hidden="true" /></a> |
+    <a asp-action="Edit" asp-route-id="@ID" class="btn btn-warning"><span class="fa fa-pencil-square-o" aria-hidden="true" /></a> |
+    <a asp-action="Delete" asp-route-id="@ID" class="btn btn-danger"> <span class="fa fa-trash" aria-hidden="true" /></a>
+</div>

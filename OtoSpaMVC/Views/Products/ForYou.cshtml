@@ -1,0 +1,35 @@
+﻿@model OtoSpaMVC.Models.Product[][]
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    System.Console.WriteLine(Model);
+    //int[][] i = ViewBag.learn as int[][];
+    int i = 1;
+    foreach (Product[] recommend in Model)
+    {
+        <h3>#@i recommendation</h3>
+        <div>
+            @foreach (Product prodRec in recommend)
+            {
+                @:<partial name="_SingleProduct" , model="@prodRec" />
+            }
+        </div>
+        i++;
+    }
+
+    i = 1;
+    foreach (Product[] recommend in Model)
+    {
+        <h3>#@i recommendation</h3>
+        <div>
+            @foreach (Product prodRec in recommend)
+            {
+                @: @prodRec.ProductPrice
+            }
+        </div>
+        i++;
+    }
+
+}

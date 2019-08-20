@@ -1,0 +1,95 @@
+﻿@model IEnumerable<OtoSpaMVC.Models.GoogleMap>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="~/css/TestBody.css" />
+<div class="newBody">
+
+    @*<table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.langi)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.longi)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.langi)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.longi)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>*@
+
+    <div class="map">
+        <h2>GoogleMap</h2>
+
+
+        <title>Simple Map</title>
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta charset="utf-8">
+        <style>
+            /* Always set the map height explicitly to define the size of the div
+            * element that contains the map. */
+            #map {
+                height: 400px;
+                width: 400px;
+            }
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+
+        <div>
+            <div id="map"></div>
+            <script>
+      var map;
+        function initMap() {
+            var myLatLng = { lat: 31.888556, lng: 34.780474 };
+            ////var myLatLng = { lat: myLat, lng: myLan };
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: myLatLng,
+                zoom: 19
+            });
+
+            var array = @Html.Raw(Json.Serialize(Model));
+            array.forEach(function (element) {
+                defaultLogger.log(element,'GoogleMaps[ForEach]');
+                var markerLatLng = { lat: element.langi, lng: element.longi }
+              //  var markerLatLng = { lat: 31.888556, lng: 34.780474}
+                // Create a marker and set its position.
+                        var marker = new google.maps.Marker({
+                    map: map,
+                    position: markerLatLng,
+                    title: 'Hello World!'
+                });
+            });
+      }
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2v_Kv-uqxQ4vDyynajQ2m8gBsOL-0j3w
+&callback=initMap"
+                    async defer></script>
+        </div>
+    </div>
+</div>

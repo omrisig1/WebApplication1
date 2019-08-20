@@ -1,0 +1,29 @@
+﻿@model OtoSpaMVC.Models.Product
+
+
+<div class="col-sm-6 col-md-4">
+    <div class="card" style="background: #EEEEEE;">
+        <img class="card-img-top" src="@Html.DisplayFor(modelItem => Model.URIImage)" alt="">
+        <div class="card-body text-dark">
+            <h3 class="demotext">
+                @Html.DisplayFor(modelItem => Model.ProductName)
+            </h3>
+            <p>
+                @Html.DisplayFor(modelItem => Model.ProductPrice) ₪
+            </p>
+            <p>
+                <a onclick="javascript:onaddproducttocart('@Model.ID');"
+                   class="btn btn-primary" role="button">Add To Cart<i class="fa fa-cart-plus"></i></a>
+                <a asp-action="Details" asp-route-id="@Model.ID" class="btn btn-default" role="button">Details</a>
+                @{
+                    if (User.IsInRole("admin"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@Model.ID" class="btn btn-default" role="button">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-default" role="button">Edit</a>
+                    }
+                }
+            </p>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,39 @@
+﻿@model PaginatedList<OtoSpaMVC.Models.Product>
+
+
+
+<script>
+
+    function onaddproducttocart(id) {
+        prid = id;
+        defaultLogger.log("push",'_MultiProductTable');
+        $.ajax({
+            type: "GET",
+            url: "/Carts/AddProductToCart1",
+            data: {
+                productid:prid,
+                amount:1
+            },
+            success: function (result) {
+                defaultLogger.log("ok",'_MultiProductTable[Ajax]');
+            },
+            error: function (response) {
+                defaultLogger.log("error", '_MultiProductTable[Ajax]');
+            }
+        });
+    }
+</script>
+
+
+<div class="container">
+    <div class="row">
+
+        @{
+            foreach (var item in Model)
+            {
+                <partial name="_SingleProduct" model="@item" />
+            }
+
+        }
+      </div>
+</div>

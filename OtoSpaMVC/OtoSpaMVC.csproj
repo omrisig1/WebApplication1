@@ -1,0 +1,89 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-OtoSpaMVC-2CBC85C2-3552-4A68-8DF5-57CD19122B97</UserSecretsId>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20180815222849_PrimatryCategoryID2.cs" />
+    <Compile Remove="Data\Migrations\20180815222849_PrimatryCategoryID2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180815223407_PrimatryCategoryID2.cs" />
+    <Compile Remove="Data\Migrations\20180815223407_PrimatryCategoryID2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180816115950_PrimatryCategoryID2.cs" />
+    <Compile Remove="Data\Migrations\20180816115950_PrimatryCategoryID2.Designer.cs" />
+    <Compile Remove="Data\Migrations\20180818171534_topProdcts.cs" />
+    <Compile Remove="Data\Migrations\20180818171534_topProdcts.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+<!--     <None Remove="Controllers\ProductCategoriesController.cs.OLD" />
+    <None Remove="Controllers\PurchasesController.cs.old" /> -->
+    <None Remove="Views\Home\Index1.cshtml.backup" />
+    <None Remove="Views\Products\_AverageRating.cshtml.old" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\Products\_AverageRating.cshtml.old" />
+  </ItemGroup>
+
+<!--   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" PrivateAssets="All" />
+    <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="2.0.0" />
+  </ItemGroup> -->
+  <ItemGroup>
+    <PackageReference Include="Accord.MachineLearning" Version="3.8.0" />
+    <PackageReference Include="FluentScheduler" Version="5.3.0" />
+    <PackageReference Include="jQuery" Version="3.3.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Net.Compilers" Version="2.8.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.2" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.1" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\clientcontact\css\style.css" />
+    <None Include="wwwroot\clientcontact\images\banner5.jpg" />
+    <None Include="wwwroot\clientcontact\index.html" />
+    <None Include="wwwroot\clientcontact\w3layouts-License.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\ApplicationUser\Create.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\ApplicationUser\Delete.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\ApplicationUser\Details.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\ApplicationUser\Edit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\ApplicationUser\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Home\_SingleProduct.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\ErrorNotLoggedIn.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\Bubbles\" />
+  </ItemGroup>
+
+</Project>

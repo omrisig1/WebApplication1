@@ -1,0 +1,46 @@
+﻿@model IEnumerable<OtoSpaMVC.Models.bProductsRatings>
+
+@{
+    foreach (var p in Model) { p.countStars(); }
+
+    List<string> csv = new List<string>();
+    foreach (var p in Model)
+    {
+        string line = "";
+        if (p.ratings == null ||
+            p.ratings.Count() == 0 ||
+            p.stars.Count() == 0)
+        {
+            line = "Unrated-"
+                + p.product.PrimaryCategory.Name + "-" +
+                p.product.ProductName + ",1";
+            csv.Add(line);
+        }
+        else
+        {
+            line = "Rated-"
+                + p.product.PrimaryCategory.Name + "-" +
+                p.product.ProductName + "-";
+
+            string rateLine = "";
+            double total = p.stars.Sum();
+            for (var i = 0; i < 5; i++)
+            {
+                rateLine = line
+                    + (i + 1) + "stars" + ','
+                    + (p.stars[i] / total);
+                csv.Add(rateLine);
+            }
+        }
+    }
+}
+<script lang="text/javascript">
+@{
+    var csvText = "";
+    foreach (var line in csv) {
+        csvText += line +'\n';
+    }
+}
+defaultLogger.log('@Html.Raw(csvText)','/Ratings/_blobsToCsv');
+</script>
+@Html.Raw(csvText)

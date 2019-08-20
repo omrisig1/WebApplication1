@@ -1,0 +1,33 @@
+﻿@model object
+@{
+    //ViewData["Title"] = "You must be a registered user to buy.";
+}
+
+<div class="header">
+    <h1>@ViewData["Title"]</h1>
+</div>
+
+<br />
+<link rel="stylesheet" href="~/css/TestBody.css" />
+<div class="newBody">
+    <div>
+        Dear customer,
+        To use this part of our website you must have a user account.<br />
+        Considered <a asp-area="" asp-controller="Account" asp-action="Register">Joining</a>?
+        Its absolutely free and even offers a custom experience!<br />
+        <br />
+        We welcome you to:
+        <li><span class="fa fa-pencil"></span> <a asp-area="" asp-controller="Account" asp-action="Register">Register now</a> and enjoy all the benefits.</li>
+        <li><span class="fa fa-sign-in"></span> <a asp-area="" asp-controller="Account" asp-action="Login">Log in</a> if you're a member already!</li>
+        <br />
+        Alternatively, you can:
+        <li><span class="fa fa-arrow-left"></span> <a href="javascript:history.back()">Go Back</a> to that page you were on. We won't mind.</li>
+        <li><span class="fa fa-home"></span> <a asp-area="" asp-controller="Home" asp-action="Index">Home Page</a> always has somthing great in store for you~</li>
+        <br />
+        We hope you have a Spa-tastic time here with us!<br />
+        <br />
+        OtoSpa Team.
+    </div>
+</div>
+
+

@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+<h2>TestAuthPage</h2>
+    
+    
+@if (User.Identity.IsAuthenticated)
+{
+    <div> </div>
+}
+else
+{
+    <div>
+        <p>Enter your name to login:</p>
+        
+        <form method="post" asp-action="Login">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" />
+            <button type="submit">Login</button>
+        </form>
+    </div>
+}
+
+</body>
+</html>

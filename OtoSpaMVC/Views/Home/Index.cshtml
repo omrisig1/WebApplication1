@@ -1,0 +1,125 @@
+﻿@{
+    ViewBag.var = 3;
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="~/css/TestBody.css" />
+<div class="header">
+    <h1>Welcome To OtoSpa</h1>
+</div>
+
+<div class="newBody">
+    <div id="myCarousel" class="carousel slide  carousel-fade" data-ride="carousel" data-interval="10000">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner rounded">
+            <div class="carousel-item active" width="1140" height="360">
+                <center>
+                    <partial name="_Bubbles" />
+                </center>
+            </div>
+            <div class="carousel-item">
+                <center>
+
+                    <img src="~/images/mustang.jpeg" alt="ASP.NET" class="img-responsive" />
+                    </center>
+
+            </div>
+            <div class="carousel-item">
+                <center>
+
+                    <img src="~/images/bugatti.jpeg" alt="Visual Studio" class="img-responsive" />
+                    </center>
+            </div>
+            <div class="carousel-item">
+                <center>
+
+                    <img src="~/images/ferari.jpg" alt="Package Management" class="img-responsive" />
+                    </center>
+            </div>
+            <div class="carousel-item">
+                <center>
+
+                    <img src="~/images/alpha.jpg" alt="Microsoft Azure" class="img-responsive" />
+                    </center>
+            </div>
+
+        </div>
+        <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="row" dir="rtl">
+        <div class="col-md-3">
+            <h2>טיפולים מיוחדים</h2>
+            <ul>
+                <li>אנו מבצעים טיפולים מיוחדים לרכב</li>
+                <li>ניקוי ריפודים</li>
+                <li>פוליש / וקס</li>
+                <li>פלסטלינה להסרת כתמים</li>
+                <li>הזמנה והתקנת ריפודים בהזמנה אישית</li>
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <h2> אביזרים לרכב</h2>
+            <ul>
+                <li>אנו מוכרים אביזרים לרכב</li>
+                <li>ריפודים לרכב</li>
+                <li>כיסוי הגה</li>
+                <li>כל מה שהרכב צריך ברמה הגבוהה ביותר</li>
+           </ul>
+        </div>
+        <div class="col-md-3">
+            <h2>מוצרים לניקיון הרכב</h2>
+            <ul>
+                <li>עשה זאת בעצמך</li>
+                <li>אנו מוכרים מוצרים לניקיון הרכב</li>
+                <li>ג'ילדות וסבונים, כל מה שצריך</li>
+                </ul>
+        </div>
+        <div class="col-md-3">
+            <h2>שירותי רחיצה</h2>
+            <ul>
+                <li>
+                    אצלנו.. הרכב שלכם יקבל את הטיפול הטוב ביותר!!
+                    >>שטיפת כל סוגי המכוניות<<
+                    מחיר מצויין וניקיון מושלם!!
+                    שטיפה חיצונית ופנימית לרכב, דיטיילינג מקצועי
+                </li>
+            </ul>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                document.onload = getTopProducts();
+            });
+            function getTopProducts() {
+                $.ajax({
+                    type: "GET",
+                    url: "/Products/_TopProducts",
+                    //data: { "n": 4 },
+                    success: function (result) {
+                        var container = $("#topProdsPlaceholder");
+                        container.replaceWith(result);
+                    },
+                    error: function (response) {
+                        defaultLogger.log("AAAAAA",'\Home\Index[Ajax]');
+                    }
+                });
+            }
+        </script>
+        <div id="idSubView">
+            <center><p><h1>מוצרים מומלצים</h1></p></center>
+            <span id="topProdsPlaceholder"></span>
+        </div>
+
+    </div>
+</div>

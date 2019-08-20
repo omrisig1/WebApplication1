@@ -1,0 +1,217 @@
+﻿@{
+    ViewData["Title"] = "About Us";
+}
+<link rel="stylesheet" href="~/css/TestBody.css" />
+
+<div class="Goodie">
+    <h2>@ViewData["Title"]</h2>
+    <div></div>
+    <h3>@ViewData["Message"]</h3>
+</div>
+<script>
+    $(document).ready(function () {
+        $('.carousel').carousel('pause')
+
+        $('video').on('ended', function () {
+            $('.carousel').carousel('cycle');
+        });
+        $('iframe').on('ended', function () {
+            $('.carousel').carousel('cycle');
+        });
+    });
+</script>
+<script>
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.font = "30px Arial";
+
+    var c = document.getElementById("myCanvas");
+    ctx.font = "30px Arial";
+    var ctx = c.getContext("2d");
+
+
+    // Create gradient
+    var grd = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
+    grd.addColorStop(0, "blue");
+    grd.addColorStop(1, "white");
+
+    // Fill with gradient
+    ctx.fillStyle = grd;
+    ctx.fillRect(10, 10, 150, 80);
+
+    ctx.strokeText("OtoSpa", 30, 60);
+</script>
+
+
+
+
+
+
+
+
+<div class="newBody">
+
+    <section>
+        <div>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#abouttab" class="btn btn-warning" aria-controls="settings" role="tab" data-toggle="tab">About</a></li>
+
+                <li role="presentation"><a href="#imgtab" class="btn btn-warning" aria-controls="home" role="tab" data-toggle="tab">Img</a></li>
+                <li role="presentation"><a href="#Tabcanvas" class="btn btn-warning" aria-controls="profile" role="tab" data-toggle="tab">Canvas</a></li>
+                <li role="presentation"><a href="#carouseltab" class="btn btn-warning" aria-controls="messages" role="tab" data-toggle="tab">Videos</a></li>
+                <li role="presentation"><a href="#WeaterTab" class="btn btn-warning" aria-controls="settings" role="tab" data-toggle="tab">Weater</a></li>
+                <li role="presentation"><a href="#texttab" class="btn btn-warning" aria-controls="settings" role="tab" data-toggle="tab">Text</a></li>
+
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane" id="imgtab">
+                    <img src="https://scontent-lhr3-1.xx.fbcdn.net/v/t1.0-9/26908057_1285433211558603_3100024830760260114_n.jpg?_nc_cat=0&amp;oh=f8aeac6b418286cc1afe00acbbd82b12&amp;oe=5BC8BB28"
+                         class="img-responsive img-rounded" alt="Responsive image" style="width:100px">
+                </div>
+                <div role="tabpanel" class="tab-pane" id="Tabcanvas">
+                    <partial name="_Bubbles" />
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="carouseltab">
+                    <div class="centerV">
+                        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel" style="width:640px;">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <center>
+                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/MFsfIKetMoc"
+                                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    </center>
+                                </div>
+                                <div class="carousel-item">
+                                    <center>
+                                        <video style="width:inherit;" controls>
+                                            <source src="~/videos/omritothe1000000.mp4" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </center>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="WeaterTab">
+                    <aside>
+                        <div>
+                            <h2>Weather Now</h2>
+                            <p id="temp"></p>
+                            <p id="humidity"></p>
+                            <p id="name"></p>
+                            <button>Check the Weather</button>
+
+                            <script>
+            $(document).ready(function () {
+                $("button").click(function () {
+                    $.get("@Url.Action("GetWeather", "Home")", function (response) {
+                        defaultLogger.log(response, '\Home\About[Ajax,Weather]');
+                        var obj = $.parseJSON(response);
+                       // defaultLogger.log(response.replace(/\\/g, ''));
+                        //defaultLogger.log(JSON.stringify(response));
+                        $("#temp").text("Temprature is: "+obj.main.temp);
+                        $("#humidity").text("Humidity is: " +obj.main.humidity);
+                        $("#name").text("You should come to wash!");
+                        defaultLogger.log(temp,'\Home\About[Ajax,Weather]');
+                        //$("#temp").show();
+                      //  $("#temp").text(response.main.temp);
+                     //   $("#humidity").text(response.main.humidity);
+                    });
+                });
+            });
+                            </script>
+                            <a class="btn btn-primary" href="~/GoogleMaps/Index" role="button">Check out our location</a>
+                        </div>
+                    </aside>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="texttab" dir="rtl">
+                    <h1 dir="rtl">אפליקציה שתצחצח לכם את האוטו בלי שימוש במים</h1>
+                    <h2>המכונית מלוכלכת אבל אין לכם זמן וכוח לקחת אותה למכון שטיפה? האפליקציה של חברת Bonshine מאפשרת להזמין עובד שינקה לכם את האוטו בכל מקום שתרצו</h2>
+                    <div class="newspaper">
+                        שגיא כהן
+                        … מה החברה עושה?
+
+                        מטרתה העיקרית של חברת Bonshine היא להיות הדור החדש בתחום שטיפת הרכבים. היא מציעה שירות ניקוי רכבים מסוג חדש: מזמינים ניקוי באפליקציה, ואיש צוות מגיע להבריק את האוטו בכל זמן ומקום, ללא מים. הניקוי מתבצע על ידי חומר העשוי מצמחים ומועשר בחמישה סוגי וקס. בסיום הניקוי הלקוח מקבל הודעה כולל תמונות של הרכב הנקי.
+
+                        למשתמש יש אפשרות לדרג את המנקה, לשלם בכרטיס האשראי דרך האפליקציה ולהשאיר טיפ לאיש הצוות, אם יבחר. עלות השטיפה: 65 שקל לפנימי וחיצוני. 29 שקל לשטיפה חיצונית בלבד. החברה פועלת כיום באזורי המשרדים של הרצליה פיתוח ופארק ההיי־טק ברמת החייל, ובהמשך מתוכננת הרחבת אזורי הפעילות.
+
+                        … מי אתם?
+
+                        אלכס נגורסקי, איש עסקים בתחום הנדל"ן, מסעדנות ותחבורה, עלה מאוקראינה לישראל לפני 5 שנים. הוא פגש את תאודור גור כששכר ממנו את דירתו הראשונה. גור, גם הוא עולה מברית־המועצות לשעבר, כיהן כמנהל בכיר במפעלי "נשר". ההיכרות הפכה לחברות והשניים החלו לגבש את הרעיון של שטיפת רכבים שמגיעה עד אליך. הם גייסו את דוד גלטמן, יזם בעל ניסיון ולשעבר מנכ"ל חברת גט טקסי, שמכהן כדירקטור בחברה, ואת יוסי יתח, יזם בעל ניסיון בהקמת סטארט־אפים המשמש כיום כמנכ"ל החברה.
+
+                        … איך נולד הרעיון?
+
+                        אלכס נגורסקי, שמאמין בסדר וניקיון כעקרונות מובילים בהתנהלות היומיומית, לא יכול לדמיין סיטואציה שבה ייסע ברכב מלוכלך. מבחינתו, זה כמו הגעה לפגישה עסקית עם חולצה מלוכלכת – דבר שאינו מתקבל על הדעת. הוא מצא את עצמו מבלה שעות נוספות בתור לשטיפת הרכב במכונים. המייסדים גיבשו את הרעיון שהשטיפה תגיע עד ללקוח ולא להפך. שטיפה רגילה, שכוללת שימוש במים, מחייבת שטח מתאים ותשתיות, וכך עלה הרעיון לניקוי ללא שימוש במים.
+
+                        … איך עושים מזה כסף?
+
+                        השירות ניתן בתשלום. לצד לקוחות פרטיים, בחברת Bonshine מתמקדים בלקוחות עסקיים המעסיקים כמות גדולה של עובדים בעלי רכבים שממוקמים בחניות גדולות. לפיכך ניתן לספק את השירות לריכוז גבוה של רכבים הנמצאים במקום אחד. מודל זה חוסך זמן, מקטין ומייעל את ביצועי החברה.
+
+                        … כמה כסף גייסתם?
+
+                        עד היום גייסנו מיליון וחצי דולר ממשקיעים פרטיים.
+
+                        … כמה לקוחות יש?
+
+                        האפליקציה רשמה כבר מעל 10,000 אלף הורדות בתוך 3 חודשים ומדי חודש מתווספים לשירותנו כ־1,000 משתמשים חדשים, זאת בנוסף ללקוחות הקבועים.
+
+                        … יש כבר הכנסות?
+
+                        כן, והן במגמת גידול מדי חודש.
+
+                        … איפה המשרדים ממוקמים?
+
+                        משרדי החברה ממוקמים בפארק ההיי־טק אולימפיה בפתח־תקווה, וכיום מועסקים בחברה 10 אנשי מטה, 5 מנהלים אזוריים ומעל 30 שוטפים. החברה צפויה להתרחב במהלך 2016 לארצות־הברית ובהמשך לאוסטרליה.
+
+                        … איך מפנקים את העובדים?
+
+                        כל העובדים שלנו עובדים באווירה ובתנאים של חברת סטארט־אפ, החל מלבוש נוח ועד בונוסים ותמריצים. פעם ברבעון אנו מקיימים כנס שבו נבחר העובד המצטיין לפי דירוג הלקוחות באפליקציה, והוא נהנה מהטבות מיוחדות.
+
+                        … אתם מגייסים עובדים חדשים?
+
+                        כן, כל הזמן.
+
+                        … מה החזון לעתיד?
+
+                        כבר בימים אלו, חברת Bonshine פועלת להרחבת פעילותה בחו"ל. המוקדים העיקריים של החברה הם אוסטרליה וארצות־הברית, וביקוש ממדינות נוספות יתקבל בברכה. אנו מאמינים בשיטתנו הירוקה והחסכונית שמביאה את הבשורה המהפכנית לתחום שטיפת הרכבים. אנו שמים לעצמנו למטרה להפוך את השיטה לברירת המחדל בעולם המודרני.
+
+                        בישראל נפעל להרחבת אזורי הפעילות והנגשת השירות לכל משתמש בכל אזורי הארץ ללא המתנה ובזמן המתאים. הדגש הוא על הענקת שירות ב"זמן מת" מבחינת הרכב, כלומר באמצע יום עבודה כאשר הרכב נמצא בחניון החברה של אותו המשתמש. לפיכך אנו פועלים נמרצות ליצירת שיתופי פעולה מול חברות ובתי עסק גדולים בארץ.
+
+                        אחת המטרות הנוספות של חברת Bonshine היא להפוך את אפשרות ההעסקה בחברה לעבודה מועדפת עבור חיילים משוחררים ובכך לאפשר להם להתחיל את חייהם באזרחות במקום עבודה עם תנאים מעולים ואופק לקידום מהיר למתאימים. אנו מאמינים בשיטת הכלכלה השיתופית ושואפים להפוך לחברה שתאפשר הכשרת כל אדם מתאים לעובד של Bonshine.
+
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane active" id="abouttab">
+                    <div class="newspaper" dir="rtl">
+                        אוטו ספא - Oto Spa
+                        אוטו ספא - Oto Spa - רחיצת רכב פנימית וחיצונית. מציע מגוון רחב של אביזרי רכב ועוד. בעלי ותק ומוניטין רב בתחום. שירות אדיב, מקצועי ולשביעות רצונו של כל לקוח.
+                        שעות פתיחה סגור עכשיו
+                        א', ב', ג', ד', ה'08:00 - 18:00
+                        ו'08:00 - 16:00
+
+                    </div>
+                </div>
+
+        </div>
+    </section>
+</div>

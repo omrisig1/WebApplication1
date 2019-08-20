@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+@*@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager*@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - OtoSpa</title>
+    @*@{ViewBag.UserID = UserManager.GetUserId(User); }*@
+    @*<environment include="Development">
+                <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+                <link rel="stylesheet" href="~/css/site.css" />
+            </environment>
+        <environment exclude="Development">
+            <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.1.3/css/bootstrap.min.css"
+                      asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                      asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+                <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+            </environment>*@
+    <link rel="stylesheet" href="~/css/OtoSpa.css" asp-append-version="true" />
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/283b6d1878.js"></script>
+    @*<script defer src="https://use.fontawesome.com/releases/v5.2.0/js/all.js" integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy" crossorigin="anonymous"></script>*@
+     <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    @*<link rel="stylesheet" href="~/css/TestBody.css"  />*@
+    <script src="~/js/logger.js"></script>
+</head>
+<body class="p-3 mb-2 bg-dark text-white">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
+                <i class="fa fa-car" aria-hidden="true"></i> OtoSpa
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a id="Home" class="nav-link" asp-controller="Home" asp-action="Index">
+                            Home <i class="fa fa-home" aria-hidden="true"></i>
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="MyCartDetails" class="nav-link" asp-controller="Carts" asp-action="MyCartDetails">
+                            MyCartDetails <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="Products" class="nav-link" asp-controller="Products" asp-action="Index">
+                            OurProducts <i class="fa fa-tags" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li id="About" class="nav-item">
+                        <a id="About" class="nav-link" asp-controller="Home" asp-action="About">
+                            About <i class="fa fa-address-card"></i>
+                        </a>
+                    </li>
+                    <li id="Contacts" class="nav-item">
+                        <a id="Contacts" class="nav-link" asp-controller="Contacts" asp-action="NewContactView">
+                            Contact Us <i class="fa fa-comments"></i>
+                        </a>
+                    </li>
+
+                    @{
+                        if (User.IsInRole("admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a id="Models" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Models <i class="fa fa-database"></i> <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-area="" asp-controller="ApplicationUser" asp-action="Index">All Users</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Contacts" asp-action="Index">ContactUs Forms</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Suppliers" asp-action="Index">Suppliers</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Carts" asp-action="Index">User's Carts</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Purchases" asp-action="Index">Purchases</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Ratings" asp-action="Index">Ratings</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-area="" asp-controller="CartItems" asp-action="Index">CartItems</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="PurchaseItems" asp-action="Index">PurchaseItems</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="ProductSuppliers" asp-action="Index">ProductSuppliers</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-area="" asp-controller="GoogleMaps" asp-action="Index">GoogleMaps</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a id="Graphs" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Graphs <i class="fa fa-pie-chart"></i> <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Purchases" asp-action="Graph">Purchases.Graph</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Ratings" asp-action="Graph">Ratings.Graph</a>
+                                </div>
+                            </li>
+                        }
+                    }
+
+                </ul>
+                <partial name="_LoginPartial" />
+
+                <script src="~/js/pathMarker.js"></script>
+                <script>markPath('@Context.Request.Path');</script>
+
+            </div>
+        </nav>
+
+    </header>
+    <br />
+    <div class="body container body-content">
+        @RenderBody()
+    </div>
+    <footer class="footer bg-light rounded">
+        <div class="form-inline">
+            <span class="text-muted">&copy; 2018 - OtoSpaMVC</span>
+            <div class="fb-like" data-href="https://www.facebook.com/Otospa1/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+        </div>
+    </footer>
+    @*<environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+            </script>
+            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/4.1.3/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+            </script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>*@
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.1&appId=1892786720760222&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
